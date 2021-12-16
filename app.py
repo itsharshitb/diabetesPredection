@@ -22,7 +22,7 @@ def predict():
     
     input_query = np.array([[preg,gluc,bp,st,insulin,bmi,age]])
     result = model.predict(input_query)[0]
-    return jsonify({'Diabetes':str(result)})
+    return jsonify({'diabetes':str(result)})
 
 
 if(__name__ == "__main__"):
