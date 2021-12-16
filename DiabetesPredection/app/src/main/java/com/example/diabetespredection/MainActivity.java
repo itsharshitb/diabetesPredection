@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,7 +56,11 @@ public class MainActivity extends AppCompatActivity {
                         //successful hit
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            jsonObject.getString("")
+                            String ans = jsonObject.getString("diabetes");
+                            if(ans.equals("1"))
+                                result.setText("You are diabetic, please make an appoinment for a doctor!");
+                            else
+                                result.setText("You looks fine!");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -63,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        //Error
+                        Toast.makeText(MainActivity.this,error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }){ //passing inputs to post req
                     @Override
